@@ -1,0 +1,24 @@
+presence of p waves says mroe than lack of presence 
+
+can you have bradycardias/tachycardia and also AF need to check other conditions alongside af
+
+ectopic,, read about them, most eawsily confused with AF 
+p
+more detail into heart failure
+
+read through tags 
+
+how many people have brady/tachy and af (is it possible?)
+
+think of using 2020/2021 physionet data which is slgihtly different xper
+
+could using single beat to train on instead of whole 10sceond or 30 sfecond ssmple
+
+when dividing up dataset for training/test take into account no. different patients as well as simply number of samples 
+
+Using Encase approach, find out which expert features they sused 
+
+find out which approach from physionet is most implementable, beacuase theyre all proven 
+
+Put together 'logbook' on google slides 
+

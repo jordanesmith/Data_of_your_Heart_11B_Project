@@ -1,0 +1,28 @@
+put in ectopoic beat dfeinition in presentation 
+
+atrial and ventricular extopic beats are different, fiond differnce in definition and ECG shape
+
+are they needed in the presentation 
+
+learn the differenty codes for ECGs such as V1 or lead 1
+
+12 lead ecg tupically last 10 seconds 
+
+what does PVC or ventricular ectopic beat look like in lead 1?
+
+explain the p wave being significant 
+
+***describe/summarise the dataset in the slides, the challenge 2017 
+***explain how they trained/tested the model (did i include noisy data?)
+***explain/ decide how to divide dataset into train/test model [2017, 2020 (12 lead data therefore 10 seconds) several dataset,  MIT sinus rhythm/ arhythmia dataset ] <--- all data found on physionet
+
+
+presentation:
+
+Why started on 2017 data
+
+identifying the other potential conditions and their issues associated
+
+suggested approach
+
+attempt to get some first feasibility results on 2017 data 
