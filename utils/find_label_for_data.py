@@ -1,8 +1,6 @@
 import pandas as pd
 
-
-
-def find_label(data_filename, labels_df):
+def find_label_from_df(data_filename, labels_df):
     """Find label for given filename from a reference csv file  
 
     Parameters
@@ -23,9 +21,26 @@ def find_label(data_filename, labels_df):
     
     return label
 
+
+def get_label_from_dx_code(dx_code, path_to_ct_codes_csv="SNOMED_CT_codes.csv"):
+    """
+    Translate ct code to diagnosis label 
+
+    Parameters
+    ----------
+    dx_code : int
+        
+    path_to_ct_codes_csv : str, optional
+        by default "SNOMED_CT_codes.csv"
+
+    Returns
+    -------
+    code: str
+        the diagnosis label
+    """    
+
+    df = pd.read_csv(path_to_ct_codes_csv)
+
+    code = df.loc[df["SNOMED CT Code"] == dx_code].Dx.to_string(index=False)
     
-# path_to_labels = 'physionet_datasets/training2017/REFERENCE.csv'
-
-# labels_csv = pd.read_csv(path_to_labels, names=['filename', 'label'])
-
-# print(find_label(path_to_labels, 'A00001'))
+    return code
