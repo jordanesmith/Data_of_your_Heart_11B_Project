@@ -1,0 +1,26 @@
+presentation notes:
+
+problem is not 10 seconds rather than 30 seconds. For ahythmia detection they tak 30 second rhythm strip. Emphasis on 1 lead therefore cheap and screening is possible. 
+Lower AF burden (usually asymptomatic) leads to increased likelihood they're missed in a single point ECG
+
+image of different arhythmia 
+
+explain why presence of p waves are more important than lack of presence 
+
+move RR Intervals slide to help explain irregular irregular vs periodic irregular 
+
+summarise the dataset page explaining that for future (most data is yet to be gathered) there will be screening for 3? weeks per person. Train 
+on the previous data which is 1,2 or 4 weeks. 
+
+emphasise that cardiologist only has to see one with AF and job done
+cariologist is expensive
+for importance of the project, explain how many people are yet to be screened and the help this will provide
+
+emphasise,, on background literature slide, that the NNN approach was one of the winners of challenge 2017, is proven 
+
+check whether biobank paper is on physionet 2017 or other challenge
+
+maybe show ectopics to help explain difficulties with detecting AF
+
+
+

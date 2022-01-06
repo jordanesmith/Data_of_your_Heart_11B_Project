@@ -41,6 +41,16 @@ def get_label_from_dx_code(dx_code, path_to_ct_codes_csv="SNOMED_CT_codes.csv"):
 
     df = pd.read_csv(path_to_ct_codes_csv)
 
-    code = df.loc[df["SNOMED CT Code"] == dx_code].Dx.to_string(index=False)
-    
+    code = df.loc[df["SNOMED CT Code"].astype(int) == dx_code].Dx.to_string(index=False)
+
     return code
+
+
+def get_label_from_diagnosis(diagnosis):
+
+    if diagnosis == 'sinus rhythm' or diagnosis == 'N':
+        return 'N'
+    elif 'atrial fibrillation' in diagnosis or diagnosis == 'A':
+        return 'A'
+    else:
+        return 'O' # no ~ option because don't know which label corresponds to it

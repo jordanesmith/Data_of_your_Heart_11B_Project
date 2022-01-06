@@ -1,0 +1,34 @@
+# packages in environment at C:\Users\Jordan\Anaconda3\envs\NovelNN\envs\tf1.0:
+#
+# Name                    Version                   Build  Channel
+certifi                   2020.6.20          pyhd3eb1b0_3
+chardet                   4.0.0                    pypi_0    pypi
+colorama                  0.4.4                    pypi_0    pypi
+cycler                    0.10.0                   pypi_0    pypi
+idna                      2.10                     pypi_0    pypi
+joblib                    0.14.1                   pypi_0    pypi
+kiwisolver                1.1.0                    pypi_0    pypi
+matplotlib                3.0.3                    pypi_0    pypi
+numpy                     1.18.5                   pypi_0    pypi
+pandas                    0.25.3                   pypi_0    pypi
+pip                       20.3.4                   pypi_0    pypi
+protobuf                  3.19.1                   pypi_0    pypi
+pyparsing                 2.4.7                    pypi_0    pypi
+python                    3.5.6                he025d50_0
+python-dateutil           2.8.2                    pypi_0    pypi
+pytz                      2021.3                   pypi_0    pypi
+requests                  2.25.1                   pypi_0    pypi
+scikit-learn              0.22.2.post1             pypi_0    pypi
+scipy                     1.4.1                    pypi_0    pypi
+setuptools                40.2.0                   py35_0
+six                       1.16.0                   pypi_0    pypi
+sklearn                   0.0                      pypi_0    pypi
+tensorflow                1.0.0                    pypi_0    pypi
+threadpoolctl             2.1.0                    pypi_0    pypi
+tqdm                      4.62.3                   pypi_0    pypi
+urllib3                   1.26.7                   pypi_0    pypi
+vc                        14.2                 h21ff451_1
+vs2015_runtime            14.27.29016          h5e58377_2
+wfdb                      3.4.0                    pypi_0    pypi
+wheel                     0.37.0             pyhd3eb1b0_1
+wincertstore              0.2              py35hfebbdb8_0

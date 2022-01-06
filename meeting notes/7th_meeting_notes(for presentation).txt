@@ -1,0 +1,22 @@
+explain that took specific dataset from challenge 2020
+
+*** summarise into 'experiment' in logbook 
+different to train dataset 
+different characteristics:
+onyl lead 1
+different smapling frequency
+any filtering? (2017 is band pass filter)
+record zero padding/ all pre processing/ frequency/ no normalisation at this stage/ downsampling / cutting to 58 seconds
+how many data points 
+do samples classified as noisy, actually have noise in them?
+
+*** in presentation 
+COnfusion matrix 
+description of dataset where found
+size of dataset 
+general numbers about dataset
+
+
+
+how long are the samples?
+
