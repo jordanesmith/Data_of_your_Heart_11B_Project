@@ -13,7 +13,7 @@ answers_from_NNN_approach_2017 = pd.read_csv('Novel Neural Network/answers.csv',
 dataset_2017 = False
 
 dataset_path = "physionet_datasets\\training2020\\training_WFDB" 
-answers_from_NNN_approach_2020 = pd.read_csv('Novel Neural Network\\physionet_datasets_training2020_training_WFDBanswers_reclassified.csv', names=['filename', 'label'])
+answers_from_NNN_approach_2020 = pd.read_csv('predictions\\physionet_datasets_training2020_training_WFDBanswers_reclassified.csv', names=['filename', 'label'])
 dataset_2020 = True
 
 if dataset_2017: answers = answers_from_NNN_approach_2017
@@ -23,7 +23,6 @@ filename_label_groundtruth = []
 for filename, answer in tqdm.tqdm(zip(answers['filename'], answers['label']), total=len(answers['filename'])):
     if dataset_2017:
         ground_truth = labels_2017.loc[labels_2017['filename'] == filename]['label'].to_string(index=False).strip()
-        # if ground_truth != answer: print(ground_truth, answer, type(ground_truth), type(answer), len(ground_truth), len(answer))
         filename_label_groundtruth.append([filename, answer, ground_truth])
     elif dataset_2020:
         path_to_hea = os.path.join(dataset_path, filename.replace('.mat', '.hea'))
@@ -32,12 +31,10 @@ for filename, answer in tqdm.tqdm(zip(answers['filename'], answers['label']), to
         for dx_code in dx_codes.split(','):
             diagnosis = get_label_from_dx_code(int(dx_code))
             ground_truth = get_label_from_diagnosis(diagnosis)
-            if ground_truth == 'N' or answer == 'N':
+            if ground_truth == 'N' or ground_truth == 'A':
                 filename_label_groundtruth.append([filename, answer, ground_truth])        
-        #TODO ignore files labelled 'O' by model because they could also be 'N', see edit_csv_files for more
+        #TODO ignore files labelled 'O' by model because they could also be '~', see edit_csv_files for more
         
 
-
-
 df = pd.DataFrame(filename_label_groundtruth, columns=["filename", "predicted_label", "ground_truth_label"])
-print(sklearn.metrics.classification_report(df["ground_truth_label"], df["predicted_label"]))
+print(sklearn.metrics.classification_report(df["ground_truth_label"], df["predicted_label"], labels=['N', 'A']))

@@ -1,0 +1,18 @@
+investigate the peaks detected on 2017 dataset using the current R algorithm
+
+*** reproduce results on MIT not 2017 dataset
+
+check the grid divisions as proportions seem very small
+
+use their threshold in the paper 
+
+normalise the number of RR intervals
+
+apply to 2020 dataset as well with the holter dataset from that challenge
+
+investigate whether the grid count proportion as a percentage of total RR intervals per sample can be scaled acrooss different legnths of scans
+
+then say cut sampels in terms of 30 second sampels rather than no. RR intervals to mimick safer data
+
+take smaller steps with introducing data in the method, start with smaller subsections of the dataset 
+

@@ -1,0 +1,28 @@
+On opening Ubuntu:
+
+username
+smith456
+password: on apple passwords 
+
+cd /mnt 
+this mounts the drives in windows to linux system
+
+cd d/OneDrive\ -\ University\ of\ Cambridge/11B/Project
+To get to project work 
+
+cd /mnt/d/OneDrive\ -\ University\ of\ Cambridge/11B/Project
+
+
+
+
+Anaconda release: conda 4.10.3
+
+wget https://repo.continuum.io/archive/Anaconda2-2.4.1-Linux-x86_64.sh
+bash Anaconda2-2.4.1-Linux-x86_64.sh
+
+
+\added
+export PATH=/home/smith456/anaconda3/bin:$PATH
+to .bashrc
+
+

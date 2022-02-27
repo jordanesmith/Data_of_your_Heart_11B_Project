@@ -1,0 +1,20 @@
+# Progress so far
+Taken 2017 dataset 
+used NNN trained on 2017 
+obtained results on 2017 and 2020 [TODO] --> produce3 summary of results on these datasets
+
+
+Taken RR dRR interval grid approach used on 2017 dataset [TODO]--> show these results
+
+Compare these two results (for report) CNN vs Primitive result.
+
+Both trained on 2017 data, and tested on 2020.
+
+ 
+
+
+Start working on how to manage the data and labels for SAFER dataset. 
+
+[Done] Reply to Peter asking when I can get access to the SAFER dataset itself
+
+[Done] update logbook 

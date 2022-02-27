@@ -1,0 +1,16 @@
+*** sort out MITBIH dataset source (maybe look at metadata files)
+Remove other, remove noisy, only include normal (and clean) or AF
+
+see if cutting out smaller RR intervals which are cuased by noise leading to more R peaks detected
+
+find out confusion matrdix, or sensitivity / specificity of 2017 with RR 
+
+remove "other" from RR intervals method with 2017 dataset  	
+
+ask Yoav for the 'cleanest' 2017 data
+
+THink about why the threshold values calculated changes depending on the RR intervals per sample. Because SAFER is 30 seconds therefore less RR intervals in each section 
+
+What is the minimum number of RR intervals in SAFER samples 
+
+*** end up with much less, and much cleaner, data

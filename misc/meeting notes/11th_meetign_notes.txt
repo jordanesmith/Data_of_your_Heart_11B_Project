@@ -1,0 +1,16 @@
+*** start NNN approach on SAFER dataset
+
+because it is clearly better method
+
+have compared NNN approach to the RR approach and found it to be more effective
+
+***First experiment on SAFER with NNN approach:
+sample rate, band pass filtering, same time length sections, zero padding
+Try on 1 file first
+Potentially get SAFER dataset which was labelled by zenicor device therefore never was seen by a cardiologist 
+* this is important because Cardiologists are overloaded, therefore the statistics of how many FP AF diagnosis is important as this leads to cardiologist being overloaded
+Helps to get hold of large number of data, that doesn't have AF as identified by Zenicor, because can say "out of XXXX there was only XX incorrectly flagged as AF"
+
+
+
+
