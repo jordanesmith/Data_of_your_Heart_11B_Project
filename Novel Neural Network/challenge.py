@@ -4,6 +4,7 @@ from tqdm import tqdm
 import math 
 # import wfdb 
 # wfdb cannot be used because requires newer version of python than is used for this code with tf1 needed to run the models
+# python challenge.py ..\2_data\physionet_datasets\test_dataset csv_on_interrupt <--- example cmd line 
 
 train_dataset_name = sys.argv[1][3:].replace('\\', '_')
 
