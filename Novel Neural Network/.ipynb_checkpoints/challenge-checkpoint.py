@@ -2,10 +2,17 @@
 import scipy.io;import sys;import numpy as np;import tensorflow as tf; import os; import pandas as pd
 from tqdm import tqdm
 import math 
-# import wfdb 
+import wfdb 
 # wfdb cannot be used because requires newer version of python than is used for this code with tf1 needed to run the models
+# python challenge.py ..\2_data\physionet_datasets\test_dataset csv_on_interupt <--- example cmd line 
 
-train_dataset_name = sys.argv[1][3:].replace('\\', '_')
+#(tf-NNN-build) C:\Users\a2gputemp\Documents\Data_of_your_Heart_11B_Project-NovelNN\Novel Neural Network>python challenge.py "//Me-pcudata/data_ddrive/PeterCharlton/SAFER_Projects/2021_22_MEng_JSmith/raw_data/Feas1/ECGs/" csv_on_interupt
+
+#python challenge.py F:\DATA\JSmith_SAFER_20220310\raw_data\Feas1\ECGs csv_on_interupt
+
+
+train_dataset_name = sys.argv[1][3:].replace('\\', '_').replace('/', '_')
+
 
 
 def load_graph(frozen_graph_filename):
@@ -25,11 +32,17 @@ print('graphs loaded :)')
 
 # Loop over all files in a given test directory
 print('finding names of all test files ...')
-all_files = [file_ for file_ in os.listdir(sys.argv[1]) if file_.endswith('.mat')]
+all_files = []
+for root, dirs, files in os.walk(sys.argv[1]):
+    for file in files:
+        if(file.endswith(".dat")):
+            all_files.append(os.path.join(root,file.split(".dat",2)[0]))
+# all_files = [file_ for file_ in os.listdir(sys.argv[1]) if file_.endswith('.mat')]
 print('all files found :)')
 
 path_to_predictions_txt = "{}answers.txt".format(train_dataset_name)
 path_to_predictions_csv = "../predictions/{}answers.csv".format(train_dataset_name)
+answers_string = ""
 
 try:     
     try:
@@ -40,22 +53,33 @@ try:
         index_to_start_on = 0
 
     counter = 0
-    for test_file in tqdm(all_files[index_to_start_on:]):
+    # for test_file in tqdm(all_files[index_to_start_on:]):
+    for test_file in (["F:\\DATA\\JSmith_SAFER_20220310\\raw_data\\Feas1\\ECGs\\016000\\saferF1_016001"]):
+        
+        if counter % 100 == 0:
+            # Write result to answers.txt
+            answers_file = open(path_to_predictions_txt,"a")
+            answers_file.write(answers_string)
+            answers_file.close()
+            answers_string = ""
+        
+        
         counter += 1
-        # # Read waveform samples (input is in WFDB-MAT format)
-        samples = scipy.io.loadmat(os.path.join(sys.argv[1], test_file))['val'][0]
+        # samples = scipy.io.loadmat(os.path.join(sys.argv[1], test_file))['val'][0]
+        record = wfdb.rdrecord(test_file)
+        entire_ecg_signal = record.p_signal.T[0]
         max_length = 145 #TODO extract this from metadata folder instead
         sample_freq = 500 #TODO as above
-        sample_time_length = len(samples)/ sample_freq
+        sample_time_length = len(entire_ecg_signal)/ sample_freq
         # resample this if needed to fit the tensorshape 
         resample_needed = sample_freq != 300
         if resample_needed:
             resample_factor = 300/sample_freq
-            n = samples.size
+            n = entire_ecg_signal.size
             x_ = np.linspace(0,n,int(n*resample_factor))
             xp = np.arange(0,n)
-            yp = samples
-            samples = np.interp(x_, xp, yp).astype(int)
+            yp = entire_ecg_signal
+            entire_ecg_signal = np.interp(x_, xp, yp).astype(int)
 
         # loop over all 58 second sections  
         for i in range(math.ceil(sample_time_length/58)):
@@ -64,10 +88,10 @@ try:
                 # extract 58 second sample
                 time_range = [i*58, (i+1)*58]
                 index_range = [int(index * 300) for index in time_range] # frequency is 300 hz 
-                if index_range[1] > len(samples): #if sample is less than 58 seconds long
-                    sample_section = samples
+                if index_range[1] > len(entire_ecg_signal): #if sample is less than 58 seconds long
+                    sample_section = entire_ecg_signal
                 else:
-                    sample_section = samples[index_range[0]: index_range[1]]
+                    sample_section = entire_ecg_signal[index_range[0]: index_range[1]]
 
                 # Your classification algorithm goes here...
                 Sxx = (sample_section-7.51190822991)/235.404723927
@@ -81,11 +105,10 @@ try:
                 # TODO change this, currently only the first 58 seconds are used for diagnosis
         
         index = [1 if np.argmax(p5+p6+p7) == 1 else np.argmax(p1+p2+p3+p4)][0]
+        answers_string += "%s,%s\n" % (test_file,["N","A","O","~"][index])
+        print(answers_string)
+            
 
-        # Write result to answers.txt
-        answers_file = open(path_to_predictions_txt,"a")
-        answers_file.write("%s,%s\n" % (test_file,["N","A","O","~"][index]))
-        answers_file.close()
     
     read_file = pd.read_csv(path_to_predictions_txt)
     read_file.to_csv(path_to_predictions_csv, index=None)
