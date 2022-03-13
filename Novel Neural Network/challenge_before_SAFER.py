@@ -11,6 +11,13 @@
 import scipy.io;import sys;import numpy as np;import tensorflow as tf; import os; import pandas as pd
 from tqdm import tqdm
 import math 
+import wfdb 
+import matplotlib.pyplot as plt
+from utils.preprocessing import baseline_als, butter_lowpass_filter
+from scipy.sparse import csc_matrix, spdiags
+from scipy.sparse.linalg import spsolve
+from scipy.signal import butter, lfilter, freqz
+
 
 
 ### parse the command line arguments
@@ -80,7 +87,12 @@ try:
         counter += 1
         
         # Read waveform samples (input is in WFDB-MAT format)
+        #TODO insert try except here
         samples = scipy.io.loadmat(os.path.join(dataset_path, test_file))['val'][0]
+        record = wfdb.rdrecord(test_file)
+        entire_ecg_signal = record.p_signal.T[0]
+        entire_ecg_signal = entire_ecg_signal - baseline_als(entire_ecg_signal)
+        entire_ecg_signal = butter_lowpass_filter(entire_ecg_signal, 0.7, 30)
         
         # resample this if needed to fit the tensorshape 
         max_length = 145 #TODO extract this from metadata folder instead
