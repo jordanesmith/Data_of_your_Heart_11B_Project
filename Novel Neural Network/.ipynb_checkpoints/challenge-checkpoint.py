@@ -3,6 +3,11 @@ import scipy.io;import sys;import numpy as np;import tensorflow as tf; import os
 from tqdm import tqdm
 import math 
 import wfdb 
+import matplotlib.pyplot as plt
+from utils.preprocessing import baseline_als, butter_lowpass_filter
+from scipy.sparse import csc_matrix, spdiags
+from scipy.sparse.linalg import spsolve
+from scipy.signal import butter, lfilter, freqz
 # wfdb cannot be used because requires newer version of python than is used for this code with tf1 needed to run the models
 # python challenge.py ..\2_data\physionet_datasets\test_dataset csv_on_interupt <--- example cmd line 
 
@@ -43,7 +48,7 @@ print('all files found :)')
 path_to_predictions_txt = "{}answers.txt".format(train_dataset_name)
 path_to_predictions_csv = "../predictions/{}answers.csv".format(train_dataset_name)
 answers_string = ""
-
+    
 try:     
     try:
         df_prev_pred = pd.read_csv(path_to_predictions_csv, names=['filename', 'label'])
@@ -53,8 +58,8 @@ try:
         index_to_start_on = 0
 
     counter = 0
-    # for test_file in tqdm(all_files[index_to_start_on:]):
-    for test_file in (["F:\\DATA\\JSmith_SAFER_20220310\\raw_data\\Feas1\\ECGs\\016000\\saferF1_016001"]):
+    for test_file in tqdm(all_files[index_to_start_on:]):
+    # for test_file in (["F:\\DATA\\JSmith_SAFER_20220310\\raw_data\\Feas1\\ECGs\\006000\\saferF1_006001"]):
         
         if counter % 100 == 0:
             # Write result to answers.txt
@@ -68,6 +73,8 @@ try:
         # samples = scipy.io.loadmat(os.path.join(sys.argv[1], test_file))['val'][0]
         record = wfdb.rdrecord(test_file)
         entire_ecg_signal = record.p_signal.T[0]
+        entire_ecg_signal = entire_ecg_signal - baseline_als(entire_ecg_signal)
+        entire_ecg_signal = butter_lowpass_filter(entire_ecg_signal, 0.7, 30)
         max_length = 145 #TODO extract this from metadata folder instead
         sample_freq = 500 #TODO as above
         sample_time_length = len(entire_ecg_signal)/ sample_freq
@@ -80,7 +87,9 @@ try:
             xp = np.arange(0,n)
             yp = entire_ecg_signal
             entire_ecg_signal = np.interp(x_, xp, yp).astype(int)
-
+        
+        # plt.plot(entire_ecg_signal)
+        # plt.show()
         # loop over all 58 second sections  
         for i in range(math.ceil(sample_time_length/58)):
 
