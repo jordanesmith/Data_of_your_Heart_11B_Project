@@ -1,0 +1,23 @@
+Notes for first Meeting easter term:
+
+What different metric to use for measuring the model's effectiveness?
+
+1) Average/ std of probability of AF given to sample actually labelled as AF
+2) -||- 		       of Not AF given sample actually labelled Not AF
+3) Random collection of samples, find number of times a non AF sample is ordered before an AF sample (which is undesirable)
+4) Probability of detecting other arrhytmia
+5) Probability of detecting noise
+6) take if at least 1 or 2 samples are labelled are 
+
+
+
+AF detection done by cardiologist not automated entirely
+condiser cardiologist becoming complacent due to the prioritisation, therefoer it is improtatnt to nto ever miss it
+feas 1 is entirely labelled therefore can test exactly the ordering
+explain that not all smaples from a apt3einet are individually labelled if patient as a whole is diagnosed
+ignore noisy 
+formulate the dataset on what is available, and the choiice of labelling for testing metric (is other bunched togetber)
+only include loads of detail on RRdRR approach if it contributes to the stroy of the report, or fould just say it has been analysed and found that the NNN approach is better
+results can be presented on level of pateint or recording
+***plot the summarys about the SAFER dataset such as the numebr of labelled recordings per patient, see proportion of them labelled per patient
+important to not label AF as Non AF, other way around not as bad

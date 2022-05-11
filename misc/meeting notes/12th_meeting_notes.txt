@@ -1,0 +1,17 @@
+*** talk to Yoav about the band pass filtering with the SAFER data
+
+apply his method 
+
+get to the stage that can get some stats out, and the quick gains for the application
+
+**compare to zenicor algorithms by per person or per ecg by running algorithm on entire dataset
+
+anything labelled Normal by Zenicor wasn't sent to cardiologist, therefore expecting all data that is  on hard drive to be difficult to read as it as ifentififed as not normlal
+
+feas1 study is entirely labelled by cardiologist 
+
+eventually come up with a good performance matrix, because otherwise no measure possible
+
+Want the assesor to pay more attention on the performance than the algorithm development
+
+check that Feas2 data looks like Feas1 and is same preprocessing
