@@ -67,7 +67,7 @@ for root, dirs, files in os.walk(dataset_path):
 print('all files found :)')
 
 #TODO delete this/ find better way
-all_files = pd.read_csv("F:\\DATA\\JSmith_SAFER_20220310\\raw_data\\Feas1\\files_with_normal.csv", names=["filepath"]).filepath.to_list()
+# all_files = pd.read_csv("F:\\DATA\\JSmith_SAFER_20220310\\raw_data\\Feas1\\files_with_normal.csv", names=["filepath"]).filepath.to_list()
 
 
 
@@ -100,8 +100,8 @@ try:
         elif ".dat" in filetypes:
             record = wfdb.rdrecord(test_file)
             ecg = record.p_signal.T[0]
-            ecg = ecg - baseline_als(ecg)
-            ecg = butter_lowpass_filter(ecg, 0.7, 30)
+            # ecg = ecg - baseline_als(ecg)
+            # ecg = butter_lowpass_filter(ecg, 0.7, 30)
         
         # resample this if needed to fit the tensorshape 
         max_length = 145 #TODO extract this from metadata folder instead
