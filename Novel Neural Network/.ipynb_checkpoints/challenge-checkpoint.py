@@ -1,3 +1,4 @@
+""" conda env tf-NNN-build"""
 """python challenge.py ..\2_data\physionet_datasets\dev .mat csv_on_interupt <--- example cmd line """
 """                    [    dataset_relative_path     ] 
                                                         [filetypes present]
