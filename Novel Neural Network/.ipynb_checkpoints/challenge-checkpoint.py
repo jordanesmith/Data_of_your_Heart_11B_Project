@@ -83,8 +83,10 @@ try:
 
     # Find which files to start on 
     try:
-        df_prev_pred = pd.read_csv(path_to_predictions_made_csv, names=['filename', 'label'])
+        df_prev_pred = pd.read_csv(path_to_predictions_made_csv, names=['filename', "N_probability", "A_probability", "O_probability", "~_probability"])
         most_recent_prediction = df_prev_pred.filename.sort_values(ascending=False).iloc[0]
+        print("all_files:", all_files)
+        print("most_recent_prediction", most_recent_prediction)
         index_to_start_on = np.where(np.array(all_files)==most_recent_prediction)[0][0] + 1
     except FileNotFoundError: 
         index_to_start_on = 0
@@ -102,7 +104,9 @@ try:
             ecg = record.p_signal.T[0]
             # ecg = ecg - baseline_als(ecg)
             # ecg = butter_lowpass_filter(ecg, 0.7, 30)
-        
+        elif ".npy" in filetypes:
+            ecg = np.load(test_file+".npy")
+            
         # resample this if needed to fit the tensorshape 
         max_length = 145 #TODO extract this from metadata folder instead
         sample_freq = 500 # for zenicor device
@@ -159,7 +163,11 @@ try:
         
         # Write result to answers.txt
         answers_file = open(path_to_predictions_made_txt,"a")
-        answers_file.write("%s,%s\n" % (test_file,["N","A","O","~"][index]))
+        answers_file.write("{}, N:{}, A:{}, O:{}, ~:{},\n".format(test_file, 
+                                                                   overall_probabilities[0], 
+                                                                   overall_probabilities[1], 
+                                                                   overall_probabilities[2], 
+                                                                   overall_probabilities[3]))
         answers_file.close()
     
     read_file = pd.read_csv(path_to_predictions_made_txt)
